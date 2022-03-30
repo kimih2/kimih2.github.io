@@ -2,13 +2,67 @@
 <html>
 <body>
 
-<h1>My First Heading</h1>
+    <form action="/RequestTest" method="get">
+           아이디 :   <input type="text" name="id"><br>
+           비밀번호 :      <input type="password" name="passwd"><br>
+           주소 :          <input type="text" name="address"><br>
+           성별 :     남자<input type="radio" name="gender" value="male">
+                     여자<input type="radio" name="gender" value="female"><br>
+           반려동물 :  강아지<input type="checkbox" name="checkDog" value="d">
+ 
+                           고양이<input type="checkbox" name="checkCat" value="c">
+ 
+                           기타  <input type="checkbox" name="checkEtc" value="e"><br>
+         가입경로 :  <select name="source">
+                          <option value="recommand">친구추천</option>
+                          <option value="search">인터넷검색</option>
+                          <option value="facebook">페이스북</option>
+                          <option value="advertise">광고</option>
+                     </select><br>
+          기타사항 : <textarea name="etc" rows="3" cols="30"></textarea><br><br>
+           <input type="submit" value="전송!"> <input type="reset" value="취소">
+     </form>
 
-<p>My first paragraph.</p>
-<br>prod<input type="radio" name="gender" value="prod">
-<br>stage<input type="radio" name="gender" value="stage">
-<br>dev<input type="radio" name="gender" value="dev"> 
+
+ 
+
 
 </body>
+  @WebServlet("/RequestTest")
+public class RequestTest extends HttpServlet implements Servlet {
+ 
+     protected void doGet(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+           request.setCharacterEncoding("utf-8");
+           String id = request.getParameter("id");
+           String passwd = request.getParameter("passwd");
+           String address = request.getParameter("address");
+           String gender = request.getParameter("gender");
+           String checkDog = request.getParameter("checkDog");
+           String checkCat = request.getParameter("checkCat");
+           String checkEtc = request.getParameter("checkEtc");
+           String source = request.getParameter("source");
+           String etc = request.getParameter("etc");
+ 
+ 
+ 
+           System.out.println("아이디 : " + id);
+           System.out.println("비밀번호 : " + passwd);
+           System.out.println("주소 : " + address);
+           System.out.println("성별 : " + gender);
+           System.out.println("반려 강아지 : " + checkDog);
+           System.out.println("반려 고양이 : " + checkCat);
+           System.out.println("반려 기타 : " + checkEtc);
+           System.out.println("가입경로 : " + source);
+           System.out.println("기타사항 : " + etc);
+ 
+     }
+ 
+     protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                throws ServletException, IOException {
+           doGet(request, response);
+     }
+ 
+}
 </html>
 
